@@ -7,7 +7,12 @@ phases:
   build:
     commands:
       - echo Build started on `date`
-      - mvn test 
+      - mvn surefire-report:report #Running this task to execute unit tests and generate report.
+reports: #New
+  SurefireReports: # CodeBuild will create a report group called "SurefireReports".
+    files: #Store all of the files
+      - '**/*'
+    base-directory: 'target/surefire-reports' # Location of the reports 
   post_build:
     commands:
       - echo Build completed on `date`
