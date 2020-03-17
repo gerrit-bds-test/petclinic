@@ -7,16 +7,16 @@ phases:
   build:
     commands:
       - echo Build started on `date`
-      - mvn surefire-report:report #Running this task to execute unit tests and generate report.
+      - mvn package
+  post_build:
+    commands:
+      - echo Running tests for surefire junit
+      - mvn test -f surefire/pom.xml -fn
 reports: #New
   SurefireReports: # CodeBuild will create a report group called "SurefireReports".
     files: #Store all of the files
       - '**/*'
     base-directory: 'target/surefire-reports' # Location of the reports 
-  post_build:
-    commands:
-      - echo Build completed on `date`
-      - mvn package
 artifacts:
   files:
     - target/spring-petclinic-2.2.0.BUILD-SNAPSHOT.jar
