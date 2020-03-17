@@ -11,7 +11,7 @@ phases:
   post_build:
     commands:
       - echo Running tests for surefire junit
-      - mvn test -f surefire/pom.xml -fn
+      - mvn surefire-report:report #Running this task to execute unit tests and generate report.
 reports: #New
   SurefireReports: # CodeBuild will create a report group called "SurefireReports".
     files: #Store all of the files
