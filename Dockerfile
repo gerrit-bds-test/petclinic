@@ -6,4 +6,4 @@ ENTRYPOINT ["java", "-jar", "petclinic.jar"]
 EXPOSE 8080
 VOLUME /tmp
 HEALTHCHECK --interval=5m --timeout=3s --retries=3 \
-      CMD curl -f http://localhost:8080 || exit 1
+      CMD curl -f http://localhost:8080 || exit
