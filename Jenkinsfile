@@ -51,7 +51,7 @@ pipeline {
     stage('Deploying cookbook on Node'){
             steps{
                 script {
-                    sshPublisher(publishers: [sshPublisherDesc(configName: 'bds7@bds7-Devops', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'cd /home/bds7/Downloads/chef-repo/cookbooks; knife upload cookbook petclinic; knife node run_list add bds20 \'recipe[petclinic::default]\' ', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '.', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '***/petclinic')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+                    sshPublisher(publishers: [sshPublisherDesc(configName: 'bds7@bds7-Devops', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'cd /home/bds7/Downloads/chef-repo/cookbooks; knife upload cookbook pet_game; knife node run_list add bds20 \'recipe[pet_game::default]\' ', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '.', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '***/petclinic')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
                 }
             }
     }        
