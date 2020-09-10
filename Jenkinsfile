@@ -1,7 +1,7 @@
 pipeline {
   environment {
     registry = "bds1959/petclinic"
-    registryCredential = 'Dockerhub'
+    registryCredential = 'git-docker'
     dockerImage = ''
   }
   agent {
@@ -14,7 +14,7 @@ pipeline {
   stages {
     stage('Cloning Git') {
             steps {
-                    git credentialsId: '3419ab79-7cb1-4c0b-93ce-27610ae8f815', url: 'https://github.com/bds1959/spring-petclinic.git'
+                    git credentialsId: 'git-docker', url: 'https://github.com/bds1959/spring-petclinic.git'
                 }
     }
     stage("mvn build") {
@@ -51,7 +51,7 @@ pipeline {
     stage('Deploying cookbook on Node'){
             steps{
                 script {
-                    sshPublisher(publishers: [sshPublisherDesc(configName: 'bds7@bds7-Devops', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'cd /home/bds7/Downloads/chef-repo/cookbooks; knife upload cookbook pet_game; knife node run_list add bds20 \'recipe[pet_game::default]\' ', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '.', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '***/petclinic')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+                    sshPublisher(publishers: [sshPublisherDesc(configName: 'devopscitool@172.16.1.168', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'cd chef-repo/cookbooks; knife cookbook upload petclinic', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)]) 
                 }
             }
     }        
