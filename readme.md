@@ -18,6 +18,9 @@ git clone https://github.com/spring-projects/spring-petclinic.git
 cd spring-petclinic
 ./mvnw package
 java -jar target/*.jar
+Add port in application.properties
+#java -jar *.jar --server.port=8089
+#java -jar -Dserver.port=8089 *.jar
 ```
 
 You can then access petclinic here: http://localhost:8080/
