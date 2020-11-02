@@ -1,4 +1,3 @@
-#app deploy
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -22,7 +21,6 @@ spec:
         ports:
         - containerPort: 8080
 ---
-#service nodeport
 apiVersion: v1
 kind: Service
 metadata:
