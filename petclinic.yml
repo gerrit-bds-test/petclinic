@@ -6,7 +6,7 @@ metadata:
   labels:
     app: pet-app
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: pet-app
@@ -20,18 +20,18 @@ spec:
         image: bds1959/spring-petclinic1:latest
         ports:
         - containerPort: 8080
-#---
-#apiVersion: v1
-#kind: Service
-#metadata:
-#  name: pet-service
-#  namespace: devops
-#  labels:
-#    app: pet-app
-#spec:
-#  selector:
-#    app: pet-app
-#  type: NodePort
-#  ports:
-#  - port: 8080
-#    targetPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pet-service
+  namespace: devops
+  labels:
+    app: pet-app
+spec:
+  selector:
+    app: pet-app
+  type: LoadBalancer
+  ports:
+  - port: 8080
+    targetPort: 8080
