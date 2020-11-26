@@ -15,7 +15,7 @@ variables:
   webAppName: 'petclinic'
 
   # Environment name
-  environmentName: 'java'
+  environmentName: 'openjdk'
   
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
