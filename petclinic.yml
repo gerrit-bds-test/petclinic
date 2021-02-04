@@ -19,7 +19,7 @@ spec:
       - name: pet-container
         image: bds1959/spring-petclinic1:latest
         ports:
-        - containerPort: 8080
+        - containerPort: 8089
 ---
 apiVersion: v1
 kind: Service
@@ -33,5 +33,5 @@ spec:
     app: pet-app
   type: LoadBalancer
   ports:
-  - port: 8080
-    targetPort: 8080
+  - port: 8089
+    targetPort: 8089
