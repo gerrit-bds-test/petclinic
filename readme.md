@@ -22,6 +22,7 @@ Add port in application.properties
 #java -jar -Dserver.port=8089 *.jar
 To run with mysql change configurations in msql-application.properties
 #java -jar -Dspring.profiles.active=mysql *.jar
+#java -jar -Dspring.profiles.active=mysql *.jar --server.port=8089
 ```
 
 You can then access petclinic here: http://localhost:8080/
