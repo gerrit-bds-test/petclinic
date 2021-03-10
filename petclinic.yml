@@ -1,37 +1,67 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: pet-deploy
+  name: pet-cicd
   namespace: devops
   labels:
-    app: pet-app
+    app: pet-cicd
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: pet-app
+      app: pet-cicd
   template:
     metadata:
       labels:
-        app: pet-app
+        app: pet-cicd
     spec:
       containers:
       - name: pet-container
         image: bds1959/spring-petclinic1:latest
         ports:
         - containerPort: 8089
+        env:
+        - name: spring.datasource.url
+          valueFrom:
+            configMapKeyRef:
+              name: pet-cicd-cnf
+              key: MYSQL_URL
+        - name: spring.datasource.username
+          valueFrom:
+            configMapKeyRef:
+              name: pet-cicd-cnf
+              key: MYSQL_USER
+        - name: spring.datasource.password
+          valueFrom:
+            configMapKeyRef:
+              name: pet-cicd-cnf
+              key: MYSQL_PASS
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: pet-service
+  name: pet-cicd-svc
   namespace: devops
   labels:
-    app: pet-app
+    app: pet-cicd
 spec:
   selector:
-    app: pet-app
+    app: pet-cicd
   type: LoadBalancer
   ports:
   - port: 8089
     targetPort: 8089
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pet-cicd-cnf
+  namespace: devops
+  labels:
+    app: pet-cicd
+  namespace: devops
+data:
+  MYSQL_URL: jdbc:mysql://10.106.222.155:3306/petclinic
+  MYSQL_USER: petclinic
+  MYSQL_PASS: petmysql
+
