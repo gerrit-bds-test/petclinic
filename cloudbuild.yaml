@@ -4,25 +4,20 @@ steps:
    args: ['package','-Dmaven.test.skip=true']
  - name: 'gcr.io/cloud-builders/docker'
    entrypoint: 'bash'
-   args: ['-c', 'docker login ghcr.io --username=$$USERNAME --password=$$PASSWORD']
-   secretEnv: ['USERNAME', 'PASSWORD']
+   args: ['-c', 'docker login ghcr.io --username=bds1959 --password=$$PASSWORD']
+   secretEnv: ['PASSWORD']
  - name: 'gcr.io/cloud-builders/docker'
    entrypoint: 'bash'
-   args: ['-c', 'docker build -t ghcr.io/$$USERNAME/petclinic:latest .']
-   secretEnv: ['USERNAME']
-
+   args: ['-c', 'docker build -t ghcr.io/bds1959/petclinic:latest .']
  - name: 'gcr.io/cloud-builders/docker'
    entrypoint: 'bash'
-   args: ['-c', 'docker push ghcr.io/$$USERNAME/petclinic:latest']
-   secretEnv: ['USERNAME']
+   args: ['-c', 'docker push ghcr.io/bds1959/petclinic:latest']
  availableSecrets:
    secretManager:
    - versionName: projects/precise-victory-308406/secrets/githubcontainerpass/versions/1
      env: 'PASSWORD'
-   - versionName: projects/precise-victory-308406/secrets/githubcontainer/versions/1
-     env: 'USERNAME'
  - name: gcr.io/cloud-builders/gcloud
-   args: ['compute', 'instances', 'update-container', '${_VM_INSTANCE}', '--container-image=ghcr.io/$$USERNAME/petclinic:latest', '--zone=us-central1-a']
+   args: ['compute', 'instances', 'update-container', '${_VM_INSTANCE}', '--container-image=ghcr.io/bds1959/petclinic:latest', '--zone=us-central1-a']
   
 # Set the Docker image in Cloud Build
-images: ['ghcr.io/$$USERNAME/petclinic']
+images: ['ghcr.io/bds1959/petclinic']
