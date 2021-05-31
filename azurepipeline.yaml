@@ -3,7 +3,7 @@ jobs:
   displayName: Build Maven Project
   steps:
   - task: Maven@3
-    displayName: 'Maven Package '
+    displayName: 'Maven Package -Dmaven.test.skip=true'
     inputs:
       mavenPomFile: 'pom.xml'
   - task: CopyFiles@2
