@@ -17,7 +17,7 @@ jobs:
 - deployment: VMDeploy
   displayName: web
   environment:
-    name: <environment name>
+    name: petclinic
     resourceType: VirtualMachine
   strategy:
       rolling:
