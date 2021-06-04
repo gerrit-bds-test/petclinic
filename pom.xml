@@ -265,8 +265,18 @@
       <url>https://www.apache.org/licenses/LICENSE-2.0</url>
     </license>
   </licenses>
-
+<!-- added azure artifact details -->
   <repositories>
+    <repository>
+      <id>bdsdevops</id>
+      <url>https://pkgs.dev.azure.com/Abhilash0451/devops-test/_packaging/bdsdevops/maven/v1</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
     <repository>
       <id>spring-snapshots</id>
       <name>Spring Snapshots</name>
